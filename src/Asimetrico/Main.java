@@ -38,12 +38,14 @@ public class Main {
             PublicKey llavePublica = keyPair.getPublic();
             PrivateKey llavePrivada = keyPair.getPrivate();
 
+            long tiempoInicial = System.nanoTime();
             byte[] cifrado = Asimetrico.cifrar(llavePublica, ALGORITMO, men);
             System.out.println("Input cifrado en RSA con Llaves de 1024 bits en byte[]: ");
             imprimir(cifrado);
             System.out.println();
 
             byte[] descif = Asimetrico.descifrar(llavePrivada, ALGORITMO, cifrado);
+            long tiempoFinal = System.nanoTime();
             System.out.println("Input descifrado en byte[]: ");
             imprimir(descif);
             System.out.println();
@@ -51,6 +53,9 @@ public class Main {
             String claro = new String(descif, StandardCharsets.UTF_8);
             System.out.println("Input descifrado convertido a texto plano: " + claro);
             System.out.println();
+            
+            long tiempo = tiempoFinal -tiempoInicial;
+            System.out.println("Tiempo cifrado-descifrado: " + tiempo);
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
