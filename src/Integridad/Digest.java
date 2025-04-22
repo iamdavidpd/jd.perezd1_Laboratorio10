@@ -42,7 +42,7 @@ public class Digest {
             int length;
             while ((length = in.read(buffer)) != -1){
                 md.update(buffer, 0, length);
-            
+
                 in.close();
             }
         } catch (NoSuchAlgorithmException | IOException e) {
