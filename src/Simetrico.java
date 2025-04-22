@@ -1,3 +1,7 @@
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+
 public class Simetrico {
     private final static String PADDING = "AES/ECB/PKCS5Padding";
 
@@ -29,5 +33,7 @@ public class Simetrico {
             System.out.println("Excepcion: " + e.getMessage());
             return null;
         }
+
+        return textoClaro;
     }
 }
