@@ -1,6 +1,9 @@
 package Integridad;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Digest {
 
@@ -25,5 +28,26 @@ public class Digest {
             out += Integer.toHexString(byteArray[i] & 0xff).toLowerCase();
         }
         System.out.println(out);
+    }
+
+    public static byte[] getDigestFile(String algorithm, String fileName) {
+        MessageDigest md = null;
+
+        try {
+            md = MessageDigest.getInstance(algorithm);
+
+            FileInputStream in = new FileInputStream(fileName);
+            byte[] buffer = new byte[1024];
+
+            int length;
+            while ((length = in.read(buffer)) != -1){
+                md.update(buffer, 0, length);
+            
+                in.close();
+            }
+        } catch (NoSuchAlgorithmException | IOException e) {
+            e.printStackTrace();
+        }
+        return md.digest();
     }
 }
